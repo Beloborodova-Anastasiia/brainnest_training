@@ -3,19 +3,22 @@ import random
 
 def main():
 
-    words = list(map(str, open('words.txt').read().split()))
     KEY_WORD = 'exit'
     UNDERLINE = '_'
     BEGIN_ASCII = ord('a')
     END_ASCII = ord('z')
+    ORIGINAL_GUESSES = 6
+    CHANGE_GUESS = 1
+    END_GUESSES = 0
+    words = list(map(str, open('./hangman_game/words.txt').read().split()))
 
     while True:
         word = random.choice(words)
-        guesses = 6
+        guesses = ORIGINAL_GUESSES
         open_letters = [UNDERLINE]*len(word)
         used_letters = []
 
-        while UNDERLINE in open_letters and guesses > 0:
+        while UNDERLINE in open_letters and guesses > END_GUESSES:
 
             print(f'You have {guesses} tries left')
             print('Used letters: ', *used_letters)
@@ -26,14 +29,14 @@ def main():
                 print('Incorrect symbol. Try again')
                 continue
             used_letters.append(letter)
-            
+
             if letter in word:
                 for i in range(len(word)):
                     if word[i] == letter:
                         open_letters[i] = letter
             else:
-                guesses -= 1
-            
+                guesses -= CHANGE_GUESS
+
         if UNDERLINE in open_letters:
             print('Sorry, you lose :-(')
             print(f'The word was {word}')
@@ -46,7 +49,7 @@ def main():
             break
         else:
             print('\n')
-            
+
 
 if __name__ == '__main__':
     main()
