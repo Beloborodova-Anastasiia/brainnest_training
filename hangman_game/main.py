@@ -4,7 +4,7 @@ import random
 def main():
 
     KEY_WORD = 'exit'
-    UNDERLINE = '_'
+    HIDING_SYMBOL = '_'
     BEGIN_ASCII = ord('a')
     END_ASCII = ord('z')
     ORIGINAL_GUESSES = 6
@@ -15,10 +15,10 @@ def main():
     while True:
         word = random.choice(words)
         guesses = ORIGINAL_GUESSES
-        open_letters = [UNDERLINE]*len(word)
+        open_letters = [HIDING_SYMBOL]*len(word)
         used_letters = []
 
-        while UNDERLINE in open_letters and guesses > END_GUESSES:
+        while HIDING_SYMBOL in open_letters and guesses > END_GUESSES:
 
             print(f'You have {guesses} tries left')
             print('Used letters: ', *used_letters)
@@ -37,7 +37,7 @@ def main():
             else:
                 guesses -= CHANGE_GUESS
 
-        if UNDERLINE in open_letters:
+        if HIDING_SYMBOL in open_letters:
             print('Sorry, you lose :-(')
             print(f'The word was {word}')
         else:
